@@ -1,0 +1,65 @@
+# Built binary (plain `go build` drops it in the repo root)
+/labwcmon
+
+# Build output (Makefile: `make build`, `make build-all`)
+/bin/
+/build/
+/dist/
+
+# Compiled objects
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Coverage and profiling output
+*.out
+*.cov
+*.prof
+coverage.txt
+coverage.html
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Vendored dependencies (CI uses `go mod download`, not `go mod vendor`)
+vendor/
+
+# Debugger binaries (Delve)
+__debug_bin*
+
+# State files written when running with `-cfg .` (normally they live in
+# ~/.config/labwcmon/)
+/layout.json
+/settings.json
+
+# IDE / editor files
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# Claude Code: per-user local settings (CLAUDE.md and shared settings stay tracked)
+.claude/settings.local.json
+
+# OS generated files
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+
+# Environment files
+.env
+.env.local
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
