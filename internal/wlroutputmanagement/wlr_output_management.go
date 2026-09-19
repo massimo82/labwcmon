@@ -53,7 +53,6 @@ func (i *OutputManager) CreateConfiguration(serial uint32) (*OutputConfiguration
 	client.PutUint32(_reqBuf[l:l+4], id.ID())
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], serial)
-	l += 4
 	err := i.Context().WriteMsg(_reqBuf[:], nil)
 	return id, err
 }
@@ -67,7 +66,6 @@ func (i *OutputManager) Stop() error {
 	client.PutUint32(_reqBuf[l:4], i.ID())
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
-	l += 4
 	err := i.Context().WriteMsg(_reqBuf[:], nil)
 	return err
 }
@@ -106,7 +104,6 @@ func (i *OutputManager) Dispatch(opcode uint32, fd int, data []byte) {
 	case 0: // head
 		l := 0
 		id := client.Uint32(data[l : l+4])
-		l += 4
 		head := NewOutputHead(i.Context())
 		i.Context().RegisterWithID(id, head)
 		if i.headHandler != nil {
@@ -119,7 +116,6 @@ func (i *OutputManager) Dispatch(opcode uint32, fd int, data []byte) {
 		var e OutputManagerDoneEvent
 		l := 0
 		e.Serial = client.Uint32(data[l : l+4])
-		l += 4
 		i.doneHandler(e)
 	case 2: // finished
 		if i.finishedHandler == nil {
@@ -404,7 +400,6 @@ func (i *OutputConfiguration) EnableHead(head *OutputHead) (*OutputConfiguration
 	client.PutUint32(_reqBuf[l:l+4], id.ID())
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], head.ID())
-	l += 4
 	err := i.Context().WriteMsg(_reqBuf[:], nil)
 	return id, err
 }
@@ -420,7 +415,6 @@ func (i *OutputConfiguration) DisableHead(head *OutputHead) error {
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], head.ID())
-	l += 4
 	err := i.Context().WriteMsg(_reqBuf[:], nil)
 	return err
 }
@@ -435,7 +429,6 @@ func (i *OutputConfiguration) Apply() error {
 	client.PutUint32(_reqBuf[l:4], i.ID())
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }
 
@@ -448,7 +441,6 @@ func (i *OutputConfiguration) Test() error {
 	client.PutUint32(_reqBuf[l:4], i.ID())
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }
 
@@ -462,7 +454,6 @@ func (i *OutputConfiguration) Destroy() error {
 	client.PutUint32(_reqBuf[l:4], i.ID())
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }
 
@@ -531,7 +522,6 @@ func (i *OutputConfigurationHead) SetMode(mode *OutputMode) error {
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], mode.ID())
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }
 
@@ -550,7 +540,6 @@ func (i *OutputConfigurationHead) SetCustomMode(width, height, refresh int32) er
 	client.PutUint32(_reqBuf[l:l+4], uint32(height))
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], uint32(refresh))
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }
 
@@ -567,7 +556,6 @@ func (i *OutputConfigurationHead) SetPosition(x, y int32) error {
 	client.PutUint32(_reqBuf[l:l+4], uint32(x))
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], uint32(y))
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }
 
@@ -583,7 +571,6 @@ func (i *OutputConfigurationHead) SetTransform(transform int32) error {
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
 	l += 4
 	client.PutUint32(_reqBuf[l:l+4], uint32(transform))
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }
 
@@ -598,6 +585,5 @@ func (i *OutputConfigurationHead) SetScale(scale float64) error {
 	client.PutUint32(_reqBuf[l:l+4], uint32(_reqBufLen<<16|opcode&0x0000ffff))
 	l += 4
 	client.PutFixed(_reqBuf[l:l+4], scale)
-	l += 4
 	return i.Context().WriteMsg(_reqBuf[:], nil)
 }

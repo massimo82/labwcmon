@@ -26,6 +26,10 @@ const (
 	fieldCount
 )
 
+// newAdvancedSettingsModel is unused while the advanced-settings screen is
+// unreachable (see canUseDescFormat in labwc.go).
+//
+//nolint:unused // kept for when the screen is wired back in
 func newAdvancedSettingsModel(monitor *Monitor) advancedSettingsModel {
 	return advancedSettingsModel{
 		monitor:      monitor,

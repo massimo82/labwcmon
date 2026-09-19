@@ -94,6 +94,8 @@ func isValidMonitorName(name string) bool {
 
 // isValidColorMode is kept for interface parity with the picker UIs, but
 // labwc's backend doesn't act on color mode. Always considered valid.
+//
+//nolint:unused // intentionally kept, see above
 func isValidColorMode(_ string) bool {
 	return true
 }
@@ -112,17 +114,6 @@ func sanitizeDesc(s string) string {
 		}
 	}
 	return s
-}
-
-var transformOrder = []string{
-	"normal", "90", "180", "270", "flipped", "flipped-90", "flipped-180", "flipped-270",
-}
-
-func transformIntToString(i int) string {
-	if i < 0 || i >= len(transformOrder) {
-		return "normal"
-	}
-	return transformOrder[i]
 }
 
 // --- Wayland connection plumbing -------------------------------------------------
@@ -623,10 +614,6 @@ func applyMonitors(monitors []Monitor) error {
 	default:
 		return fmt.Errorf("compositor rejected the output configuration")
 	}
-}
-
-func applyMonitor(m Monitor) error {
-	return applyMonitors([]Monitor{m})
 }
 
 // --- Persistence: single saved layout (no daemon, no profiles) -----------------

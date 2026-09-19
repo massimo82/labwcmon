@@ -1,0 +1,8 @@
+version: "2"
+
+linters:
+  exclusions:
+    paths:
+      # Vendored go-wayland client runtime (see LICENSE.go-wayland); kept
+      # as upstream generates it.
+      - internal/wlclient

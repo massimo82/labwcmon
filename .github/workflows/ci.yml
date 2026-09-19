@@ -104,8 +104,8 @@ jobs:
 
     - name: Install golangci-lint
       run: |
-        # Install golangci-lint from source to ensure Go 1.25.1 compatibility
-        go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        # Install golangci-lint from source to ensure compatibility with the Go version above
+        go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
 
     - name: Run golangci-lint
       run: golangci-lint run --timeout=5m

@@ -100,7 +100,7 @@ lint:
 		$(HOME)/go/bin/golangci-lint run --timeout=5m; \
 	else \
 		echo "⚠ golangci-lint not installed, skipping lint check"; \
-		echo "Install with: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest"; \
+		echo "Install with: go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest"; \
 	fi
 
 # Download dependencies

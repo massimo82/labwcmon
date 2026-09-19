@@ -82,16 +82,6 @@ func loadLayout() ([]Monitor, error) {
 	return monitors, nil
 }
 
-// hasSavedLayout reports whether a layout has ever been saved.
-func hasSavedLayout() bool {
-	path, err := getLayoutStatePath()
-	if err != nil {
-		return false
-	}
-	_, err = os.Stat(path)
-	return err == nil
-}
-
 // restoreLayout loads the saved layout and applies it live, reconciling
 // saved monitors against whatever's currently connected by HardwareID (see
 // resolveSavedMonitors in hardware_id.go) so it still works if connector
